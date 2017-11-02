@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('react and express working together');
+  res.send('api/users');
 });
 
 module.exports = router;

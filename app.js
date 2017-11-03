@@ -5,10 +5,13 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+const mongoose = require('mongoose');
+const dburl = process.env.MONGODB_URI || "mongodb://localhost:27017/database";
+
 var index = require('./routes/index');
 var users = require('./routes/users');
 var polls = require('./routes/polls');
-var beers= require('./routes/beers')
+var beers = require('./routes/beers')
 
 var app = express();
 
@@ -23,6 +26,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 //app.use(express.static(path.join(__dirname, 'public')));
+
+// connect to mongodb database
+var promise = mongoose.connect('mongodb://localhost/myapp', {
+  useMongoClient: true,
+  /* other options */
+});
 
 app.use('/', index);
 app.use('/api/users', users);

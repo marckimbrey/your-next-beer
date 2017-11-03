@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-const schema = mongoose.schema;
+const schema = mongoose.Schema;
 
-const Beer = new schema({
+const BeerSchema = new schema({
   name: {
     type: String,
     required: true
@@ -21,6 +21,6 @@ const Beer = new schema({
   strength: Number
 });
 
-const Beer = mongoose.model('Beer', BeerSchema);
+const Beers = mongoose.model('Beer', BeerSchema);
 
-module.exports = Beer;
+module.exports = Beers;

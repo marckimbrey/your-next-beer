@@ -28,10 +28,9 @@ app.use(cookieParser());
 //app.use(express.static(path.join(__dirname, 'public')));
 
 // connect to mongodb database
-var promise = mongoose.connect('mongodb://localhost/myapp', {
-  useMongoClient: true,
-  /* other options */
-});
+mongoose.connect(dburl, {useMongoClient: true}, (err) => {
+  if (err) throw err;
+})
 
 app.use('/', index);
 app.use('/api/users', users);
@@ -53,7 +52,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.end('error');
 });
 
 module.exports = app;

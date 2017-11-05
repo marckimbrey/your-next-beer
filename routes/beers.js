@@ -1,24 +1,35 @@
 const express = require('express');
-const router = express.Router();
+var router = express.Router();
 
-const Beers = require('../models/beers');
+const Beer = require('../models/beers');
 
 
 
 
 
 router.get('/', function(req, res, next) {
-  Beers.find({}).exec((err,beers) => {
+  Beer.find({}).exec((err,beers) => {
     if(err) {
       res.send('couldnt find beers')
     }
-      res.end('found beers');
+      res.json(beers);
   })
 
 });
 
-router.post('/add', function(req, res, next) {
-  res.end('api/beers/add');
+router.post('/add', function(req, res) {
+  let newBeer = new Beer({
+    name: req.body.name,
+    country: req.body.country,
+    brewery:req.body.brewery,
+    style: req.body.style,
+    strength: req.body.strength
+  });
+  newBeer.save((err, beer) => {
+    if (err) console.log('error saving to database', err);
+    res.json(beer);
+  })
+
 });
 
 module.exports = router;

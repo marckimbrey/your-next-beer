@@ -3,10 +3,14 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+var session = require('express-session');
 var bodyParser = require('body-parser');
 
 const mongoose = require('mongoose');
 const dburl = process.env.MONGODB_URI || "mongodb://localhost:27017/database";
+
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -25,7 +29,15 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(session({ secret: 'costa Rica'}));
+app.use(passport.initialize());
+app.use(passport.session())
 //app.use(express.static(path.join(__dirname, 'public')));
+
+var User = require('./models/users');
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 // connect to mongodb database
 mongoose.connect(dburl, {useMongoClient: true}, (err) => {

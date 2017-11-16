@@ -1,27 +1,38 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom'
+
+import Login from './Login'
+import Register from './Register'
+
 
 class App extends Component {
-  state = {test: ''};
-  componentDidMount() {
-    fetch('/users')
-      .then(res =>
-        res.text()).then( data =>
-          this.setState({ test: data}))
+  constructor() {
+    super()
+    this.state = {polls: [{pollName: 'not loaded from server'}]}
   }
-  render() {
+  componentDidMount() {
+
+    fetch('/api/polls')
+      .then(res =>
+        res.json()).then( data =>
+          this.setState({polls: data}))
+  }
+   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-          <p>{this.state.test}</p>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <Router>
+        <div className="App">
+          <div>{this.state.polls[0].pollName}</div>
+          <Route path='/login' component={Login}/>
+          <Route path='/register' component={Register}/>
+
+        </div>
+      </Router>
     );
   }
 }

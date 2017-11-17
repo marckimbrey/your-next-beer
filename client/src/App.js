@@ -9,12 +9,13 @@ import {
 
 import Login from './Login'
 import Register from './Register'
+import PollList from './PollList'
 
 
 class App extends Component {
   constructor() {
     super()
-    this.state = {polls: [{pollName: 'not loaded from server'}]}
+    this.state = {polls: [{pollName: 'not loaded from server', user: 'none'}]}
   }
   componentDidMount() {
 
@@ -27,7 +28,9 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <div>{this.state.polls[0].pollName}</div>
+          <Route exact path='/'  render={(props) => (
+    <PollList {...props} polls={this.state.polls} />
+  )}/>
           <Route path='/login' component={Login}/>
           <Route path='/register' component={Register}/>
 

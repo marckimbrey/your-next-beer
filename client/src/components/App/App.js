@@ -14,6 +14,7 @@ import {
 import Login from '../Login/Login'
 import Register from '../Register/Register'
 import PollList from '../PollList/PollList'
+import CreatePoll from '../CreatePoll/CreatePoll'
 
 
 class App extends Component {
@@ -39,6 +40,7 @@ class App extends Component {
           )}/>
           <Route path='/login' component={Login}/>
           <Route path='/register' component={Register}/>
+          <Route path='/createpoll' component={CreatePoll}/>
 
         </div>
       </Router>

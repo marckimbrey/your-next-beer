@@ -13,9 +13,7 @@ class BeerSelect extends Component {
 
   }
 
-  componentDidupDate() {
-        this.props.dispatch(fetchBeers())
-  }
+
   getBeerOptions(beers) {
     console.log(beers)
     return beers.map((beer, i) => {

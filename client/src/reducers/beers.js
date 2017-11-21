@@ -17,3 +17,14 @@ export default function fetchbeers(state = initialBeerState, action) {
       return state;
   }
 }
+
+export  function postbeer(state = {}, action) {
+  console.log('posted beer', action)
+  switch(action.type) {
+    case 'POST_BEER_FULFILLED':
+      console.log('beer added')
+      return [...state ,  ...action.payload]
+    default:
+      return state;
+  }
+}

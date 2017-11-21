@@ -18,6 +18,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/add', function(req, res) {
+  console.log('request',req.body)
   let newBeer = new Beer({
     name: req.body.name,
     country: req.body.country,
@@ -26,7 +27,10 @@ router.post('/add', function(req, res) {
     strength: req.body.strength
   });
   newBeer.save((err, beer) => {
-    if (err) console.log('error saving to database', err);
+    if (err) {
+      console.log('error saving to database');
+      res.json(beer);
+    }
     res.json(beer);
   })
 

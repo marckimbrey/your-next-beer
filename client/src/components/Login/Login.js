@@ -1,18 +1,59 @@
-import React from 'react';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+
+import {loginUser} from '../../actions/users'
 
 
-export default () => {
-  return(
-    <form action="/" method="post">
-      <div className="form-field">
-        <label>username:</label>
-        <input type="text" placeholder="Enter Username" name="username" required />
-      </div>
-      <div className="form-field">
-        <label>password:</label>
-        <input type="password" placeholder="Enter Password" name="password" required />
-      </div>
-      <button type="submit">Login</button>
-    </form>
-  )
+class Login extends Component  {
+  constructor() {
+    super()
+    this.state = {
+      username: '',
+      password: ''
+    };
+    this.onInputChange = this.onInputChange.bind(this)
+    this.handleFormSubmit = this.handleFormSubmit.bind(this)
+  }
+
+  onInputChange(event) {
+    let newValue = {};
+    newValue[event.target.name] = event.target.value;
+    this.setState({...this.state, ...newValue})
+  }
+  handleFormSubmit(event) {
+    if(event) event.preventDefault();
+    this.props.dispatch(loginUser(this.state))
+  }
+
+  render() {
+    return(
+      <form action="/api/users/login" method="post" onSubmit={this.handleFormSubmit}>
+        <div className="form-field">
+          <label>username:</label>
+          <input
+            type="text"
+            placeholder="Enter Username"
+            name="username"
+            value={this.state.username}
+            onChange={this.onInputChange} required />
+        </div>
+        <div className="form-field">
+          <label>password:</label>
+          <input
+            type="password"
+            placeholder="Enter Password"
+            name="password"
+            value={this.state.password}
+            onChange={this.onInputChange} required />
+        </div>
+        <button type="submit">Login</button>
+      </form>
+    )
+  }
 }
+
+function mapStateToProps(state) {
+  return {authenticated: state.authenticated}
+}
+
+export default connect(mapStateToProps)(Login)

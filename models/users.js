@@ -14,10 +14,6 @@ const userSchema = new schema({
     unique: true,
     required: true,
     trim: true
-  },
-  password: {
-    type: String,
-    required: true,
   }
 });
 

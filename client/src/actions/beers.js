@@ -13,6 +13,11 @@ export function postBeer(newBeer) {
   console.log(newBeer )
   return {
     type: POST_BEER,
-    payload: fetch('/api/beers/add', {method: 'POST', headers: {"Content-Type": "application/json" }, body: JSON.stringify(newBeer)}).then(response => response.json())
+    payload: fetch('/api/beers/add',
+    {method: 'POST', headers: {"Content-Type": "application/json" }
+    , body: JSON.stringify(newBeer)})
+    .then(response => {
+      console.log(response)
+    response.json()})
   }
 }

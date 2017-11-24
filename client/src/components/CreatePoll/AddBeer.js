@@ -30,19 +30,19 @@ class AddBeer extends Component {
   }
 
   handleNameChange = (event) => {
-    this.setState({ formData: {... this.state.formData,  name: event.target.value} });
+    this.setState({ formData: {...this.state.formData,  name: event.target.value} });
   }
   handleCountryChange = (event) => {
-    this.setState({ formData: {... this.state.formData,country: event.target.value} });
+    this.setState({ formData: {...this.state.formData,country: event.target.value} });
   }
   handleBreweryChange = (event) => {
-    this.setState({ formData: {... this.state.formData, brewery: event.target.value} });
+    this.setState({ formData: {...this.state.formData, brewery: event.target.value} });
   }
   handleStyleChange = (event) => {
-    this.setState({ formData: {... this.state.formData, style: event.target.value} });
+    this.setState({ formData: {...this.state.formData, style: event.target.value} });
   }
   handleStrengthChange = (event) => {
-    this.setState({ formData: {... this.state.formData, strength: event.target.value} });
+    this.setState({ formData: {...this.state.formData,strength: event.target.value} });
   }
   handleFormSubmit(event) {
     if(event) event.preventDefault();

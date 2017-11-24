@@ -7,7 +7,7 @@ const initialBeerState = [{
   strength: 4.0
 }]
 
-export default function fetchbeers(state = initialBeerState, action) {
+export  function fetchbeers(state = initialBeerState, action) {
   console.log('fetched beers', action)
   switch(action.type) {
     case 'FETCH_BEERS_FULFILLED':

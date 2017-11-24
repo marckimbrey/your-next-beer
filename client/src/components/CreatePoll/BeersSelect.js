@@ -15,7 +15,6 @@ class BeerSelect extends Component {
 
 
   getBeerOptions(beers) {
-    console.log(beers)
     return beers.map((beer, i) => {
       return <option value={beer} key={i}>{beer.name}  {beer.brewery}</option>
     })

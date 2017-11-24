@@ -29,9 +29,9 @@ app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(session({ secret: 'costa Rica'}));
+//app.use(session({ secret: 'costa Rica'}));
 app.use(passport.initialize());
-app.use(passport.session())
+//app.use(passport.session())
 //app.use(express.static(path.join(__dirname, 'public')));
 
 var User = require('./models/users');

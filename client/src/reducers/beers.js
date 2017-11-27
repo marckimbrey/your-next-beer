@@ -7,23 +7,18 @@ const initialBeerState = [{
   strength: 4.0
 }]
 
-export  function fetchbeers(state = initialBeerState, action) {
-  console.log('fetched beers', action)
+export default function beersReducer(state = initialBeerState, action) {
+  console.log('fetched beers', state)
   switch(action.type) {
-    case 'FETCH_BEERS_FULFILLED':
-      console.log('fetched beers')
-      return [...state ,  ...action.payload]
-    default:
-      return state;
-  }
-}
 
-export  function postbeer(state = {}, action) {
-  console.log('posted beer', action)
-  switch(action.type) {
+    case 'FETCH_BEERS_FULFILLED':
+      console.log('fetched beers', [...state ,  ...action.payload])
+      return [...state ,  ...action.payload]
+
     case 'POST_BEER_FULFILLED':
       console.log('beer added')
       return [...state ,  ...action.payload]
+      
     default:
       return state;
   }

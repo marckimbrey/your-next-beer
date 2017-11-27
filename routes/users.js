@@ -22,7 +22,7 @@ router.post('/register', function(req, res) {
         } else {
           // create jwt
           var token = jwt.sign({user: newUser.username }, 'Costa Rica')
-          res.json({username: newUser.username, token: token});
+          res.json({username: newUser.username, token: token, authenticated: true});
         }
     });
 });
@@ -30,7 +30,7 @@ router.post('/register', function(req, res) {
 router.post('/login', passport.authenticate('local'), function(req, res) {
   // create jwt
   var token = jwt.sign({user: req.body.username }, 'Costa Rica')
-  res.json({username: req.body.username, token: token});
+  res.json({username: req.body.username, token: token, authenticated: true});
 });
 
 router.get('/logout', function(req, res) {

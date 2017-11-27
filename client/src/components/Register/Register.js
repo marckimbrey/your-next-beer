@@ -67,7 +67,7 @@ class Register extends Component  {
   }
 }
 function mapStateToProps(state) {
-  return {authenticated: state.athenticated}
+  return {user: state.user}
 }
 
 export default connect(mapStateToProps)(Register)

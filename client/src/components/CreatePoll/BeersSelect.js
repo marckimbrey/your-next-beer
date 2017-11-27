@@ -9,8 +9,11 @@ import {fetchBeers} from '../../actions/beers';
 class BeerSelect extends Component {
   constructor(props) {
     super(props)
-      this.props.dispatch(fetchBeers())
 
+
+  }
+  componentDidMount() {
+          this.props.dispatch(fetchBeers())
   }
 
 
@@ -20,6 +23,7 @@ class BeerSelect extends Component {
     })
   }
    render() {
+     console.log('beers', this.props)
     return (
       <select multiple="" name="beers" >
 

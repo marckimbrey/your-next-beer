@@ -1,20 +1,17 @@
-export function registerUser(state = {}, action) {
-  console.log('registeruser', action)
+const initialUserState = {user: {username: '', token: '', authenticated: false}}
+
+export default function userReducer(state = {}, action) {
+  console.log(state)
   switch(action.type) {
+
     case 'REGISTER_USER_FULFILLED':
       console.log('registered user', action)
-      return [...state ,  {authenticated: true}]
-    default:
-      return state;
-  }
-}
+      return {...state , ...{user: action.payload}}
 
-export function loginUser(state = {}, action) {
-  console.log('loginUser', action)
-  switch(action.type) {
     case 'LOGIN_USER_FULFILLED':
       console.log('user logged in', action);
-      return [...state ,  ...{user: action.payload, actionauthenticated: true}]
+      return {...state ,  ...{user: action.payload}}
+
     default:
       return state;
   }

@@ -20,16 +20,12 @@ import CreatePoll from '../CreatePoll/CreatePoll'
 class App extends Component {
   constructor() {
     super()
-    //this.state = {polls: [{pollName: 'not loaded from server', user: 'none'}]}
+
+
   }
   componentDidMount() {
 
-  //   fetch('/api/polls')
-  //     .then(res =>
-  //       res.json()).then( data =>
-  //         this.setState({polls: data}))
-  // }
-  this.props.dispatch(fetchPolls())
+    this.props.dispatch(fetchPolls());
   }
    render() {
     return (

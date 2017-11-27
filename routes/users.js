@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var User = require('../models/users');
-//var jwt = require('jsonwebtoken')
+var jwt = require('jsonwebtoken')
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -12,17 +12,7 @@ router.get('/', function(req, res, next) {
 router.post('/register', function(req, res) {
   console.log('password',req.body.password)
   var newUser = new User({ username : req.body.username, email: req.body.email});
-    // check username is unique
-    // User.findOne({ username: req.body.username}).exec((err, user) => {
-    //   if (err)  console.log(err)
-    //   if (user) res.json({error: true, message: 'username is already taken'});
-    // });
-    // check email is unique
-    // User.findOne({ email: req.body.email}).exec((err, user) => {
-    //   if (err) console.log(err)
-    //   if (user)  res.json({error: true, message: 'email is already taken'});
-    //
-    // });
+
     //passport local mongoose function salts and hashes password
     User.register(newUser, req.body.password, function(err) {
         if (err) {
@@ -30,16 +20,17 @@ router.post('/register', function(req, res) {
           res.json({error: true, message: 'email is already taken'})
 
         } else {
-          res.json(newUser)
+          // create jwt
+          var token = jwt.sign({user: newUser.username }, 'Costa Rica')
+          res.json({username: newUser.username, token: token});
         }
     });
-
-
 });
 
 router.post('/login', passport.authenticate('local'), function(req, res) {
-  console.log('past auth', req.session)
-    res.json({user: req.session});
+  // create jwt
+  var token = jwt.sign({user: req.body.username }, 'Costa Rica')
+  res.json({username: req.body.username, token: token});
 });
 
 router.get('/logout', function(req, res) {

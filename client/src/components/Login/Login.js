@@ -18,11 +18,16 @@ class Login extends Component  {
   onInputChange(event) {
     let newValue = {};
     newValue[event.target.name] = event.target.value;
-    this.setState({...this.state, ...newValue})
+    this.setState(Object.assign(this.state,newValue));
   }
   handleFormSubmit(event) {
     if(event) event.preventDefault();
-    this.props.dispatch(loginUser(this.state))
+    console.log(this.state)
+    this.props.dispatch(loginUser(this.state)).then( response => {
+
+      localStorage.setItem('username', response.value.username)
+      localStorage.setItem('token', response.value.token)
+    })
   }
 
   render() {

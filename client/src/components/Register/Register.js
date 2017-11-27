@@ -12,22 +12,23 @@ class Register extends Component  {
       email: '',
       password: ''
     }
-      this.handleFormSubmit = this.handleFormSubmit.bind(this)
-    }
+    this.onInputChange = this.onInputChange.bind(this)
+    this.handleFormSubmit = this.handleFormSubmit.bind(this)
+  }
+  onInputChange(event) {
+    let newValue = {};
+    newValue[event.target.name] = event.target.value;
+    this.setState({...this.state,  newValue});
+  }
 
-  handleNameChange = (event) => {
-    this.setState({...this.state,  username: event.target.value} );
-  }
-  handleEmailChange = (event) => {
-    this.setState({...this.state,  email: event.target.value});
-  }
-  handlePasswordChange = (event) => {
-    this.setState({...this.state,  password: event.target.value});
-  }
 
   handleFormSubmit(event) {
     if(event) event.preventDefault();
-    this.props.dispatch(registerUser(this.state))
+    this.props.dispatch(registerUser(this.state)).then( response => {
+
+      localStorage.setItem('username', response.value.username)
+      localStorage.setItem('token', response.value.token)
+    })
   }
 
   render() {
@@ -40,7 +41,7 @@ class Register extends Component  {
             placeholder="Enter Username"
             name="username"
             value={this.state.username}
-            onChange={this.handleNameChange} required />
+            onChange={this.onInputChange} required />
         </div>
         <div className="form-field">
           <label>email:</label>
@@ -49,7 +50,7 @@ class Register extends Component  {
             placeholder="Enter Email"
             name="email"
             value={this.state.email}
-            onChange={this.handleEmailChange} required />
+            onChange={this.onInputChange} required />
         </div>
         <div className="form-field">
           <label>password:</label>
@@ -58,7 +59,7 @@ class Register extends Component  {
             placeholder="Enter Password"
             name="password"
             value={this.state.password}
-            onChange={this.handlePasswordChange}required />
+            onChange={this.onInputChange}required />
         </div>
         <button type="submit">Register</button>
       </form>

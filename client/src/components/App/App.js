@@ -15,6 +15,7 @@ import Login from '../Login/Login'
 import Register from '../Register/Register'
 import PollList from '../PollList/PollList'
 import CreatePoll from '../CreatePoll/CreatePoll'
+import Header from '../Header/Header'
 
 
 class App extends Component {
@@ -31,6 +32,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
+          <Header />
           <Route exact path='/'  render={(props) => (
             <PollList {...props} polls={this.props.polls} />
           )}/>

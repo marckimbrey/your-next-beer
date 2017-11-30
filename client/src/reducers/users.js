@@ -6,11 +6,11 @@ export default function userReducer(state = {}, action) {
 
     case 'REGISTER_USER_FULFILLED':
       console.log('registered user', action)
-      return {...state , ...{user: action.payload}}
+      return {...state , ...action.payload}
 
     case 'LOGIN_USER_FULFILLED':
       console.log('user logged in', action);
-      return {...state ,  ...{user: action.payload}}
+      return {...state ,  ...action.payload}
 
     default:
       return state;

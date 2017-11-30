@@ -9,8 +9,7 @@ import {fetchBeers} from '../../actions/beers';
 class BeerSelect extends Component {
   constructor(props) {
     super(props)
-
-
+    console.log(this.props.beersSelected)
   }
   componentDidMount() {
           this.props.dispatch(fetchBeers())
@@ -19,13 +18,16 @@ class BeerSelect extends Component {
 
   getBeerOptions(beers) {
     return beers.map((beer, i) => {
-      return <option value={beer} key={i}>{beer.name}  {beer.brewery}</option>
+      return <option value={JSON.stringify(beer)} key={i}>{beer.name}  {beer.brewery}</option>
     })
   }
    render() {
-     console.log('beers', this.props)
     return (
-      <select multiple="" name="beers" >
+      <select
+        multiple={true}
+        value={this.props.beersSelected}
+        onChange={this.props.onSelect}
+        name="beers" >
 
           {this.getBeerOptions(this.props.beers)}
 

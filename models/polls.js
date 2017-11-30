@@ -30,7 +30,7 @@ const PollSchema = new schema({
     strength: Number,
     votes: {
       type: Number,
-      required: true
+      default: 0
     }
   }]
 })

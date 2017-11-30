@@ -24,8 +24,9 @@ router.get('/:id', (req, res) => {
 
 // add to polls
 router.post('/add', (req, res) => {
+  
   const newPoll = new Poll(req.body);
-  //console.log(newPoll)
+  console.log(req.body,newPoll)
   newPoll.save((err, poll) => {
     if (err) console.log('error saving to database', err);
     console.log(poll)

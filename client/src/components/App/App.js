@@ -15,6 +15,7 @@ import Login from '../Login/Login'
 import Register from '../Register/Register'
 import PollList from '../PollList/PollList'
 import CreatePoll from '../CreatePoll/CreatePoll'
+import Poll from '../Poll/Poll'
 import Header from '../Header/Header'
 
 
@@ -22,11 +23,14 @@ class App extends Component {
   constructor() {
     super()
 
-
   }
   componentDidMount() {
 
-    this.props.dispatch(fetchPolls());
+    this.props.dispatch(fetchPolls())
+    // on app load check if username in localStorage
+    if(window.localStorage.getItem('username')) {
+
+    }
   }
    render() {
     return (
@@ -39,7 +43,9 @@ class App extends Component {
           <Route path='/login' component={Login}/>
           <Route path='/register' component={Register}/>
           <Route path='/createpoll' component={CreatePoll}/>
-
+          <Route path='/:id?' render={(props) => (
+            <Poll {...props} polls={this.props.polls}/>
+          )}/>
         </div>
       </Router>
     );

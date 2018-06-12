@@ -3,7 +3,8 @@ import PollListItem from './PollListItem'
 
 
 export default (props) => {
-  const pollList = props.polls.polls.map((poll, i) => {
+  console.log(props)
+  const pollList = props.polls.map((poll, i) => {
     return (
       <PollListItem poll={poll} key={i}/>
     )}

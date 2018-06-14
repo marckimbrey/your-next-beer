@@ -2,10 +2,29 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import Beer from './Beer'
+import {vote} from '../../actions/polls';
+
+import Beer from './Beer';
 
 
 class Poll extends Component {
+
+  constructor(props) {
+    super(props)
+    this.onVote = this.onVote.bind(this);
+  }
+
+  onVote(updatedBeer) {
+    this.poll.beers = this.poll.beers.map((beer, i) => {
+      if (beer._id === updatedBeer._id) {
+        updatedBeer.votes++;
+        return  updatedBeer
+      }
+      return beer
+    });
+    console.log(this.poll.beers);
+    this.props.dispatch(vote(this.poll))
+  }
 
   render() {
     let poll;
@@ -14,10 +33,10 @@ class Poll extends Component {
       poll = this.props.polls.filter((poll)=> {
          return (poll._id === this.props.match.params.id)
        })[0];
-
+       this.poll = poll;
         beers = poll.beers.map((beer, i) => {
            return (
-            <Beer beer={beer} key={i} />
+            <Beer beer={beer} key={i} onVote={this.onVote}/>
            )
         });
 
@@ -26,7 +45,6 @@ class Poll extends Component {
           <h5>{poll.user}</h5>
           {beers}
         </div>)
-
     }
       return (<div>Loading...</div>)
   }

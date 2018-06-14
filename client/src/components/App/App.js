@@ -43,7 +43,7 @@ class App extends Component {
           <Route path='/login' component={Login}/>
           <Route path='/register' component={Register}/>
           <Route path='/createpoll' component={CreatePoll}/>
-          <Route  path='/:id' component={Poll}/>
+          <Route path='/poll/:id' component={Poll}/>
         </div>
       </Router>
     );

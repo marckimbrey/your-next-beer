@@ -9,6 +9,7 @@ export default (props) => {
       <p>Strength: {`${props.beer.strength}%`}</p>
       <p>Country: {props.beer.country}</p>
       <p>Votes: {props.beer.votes}</p>
+      <button onClick={()=> props.onVote(props.beer)}>Vote</button>
     </div>
   )
 }

@@ -24,7 +24,7 @@ class App extends Component {
     super()
 
   }
-  componentDidMount() {
+  componentWillMount() {
 
     this.props.dispatch(fetchPolls())
     // on app load check if username in localStorage

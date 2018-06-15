@@ -12,39 +12,49 @@ class Poll extends Component {
   constructor(props) {
     super(props)
     this.onVote = this.onVote.bind(this);
+    this.state = {}
+  }
+
+  componentDidMount(props) {
+
+    let poll;
+    if(this.props.polls.length > 0) {
+      poll = this.props.polls.filter((poll)=> {
+         return (poll._id === this.props.match.params.id)
+       })[0];
+           this.setState({poll: poll, beers: poll.beers});
+    }
   }
 
   onVote(updatedBeer) {
-    this.poll.beers = this.poll.beers.map((beer, i) => {
+    const newBeers = this.state.poll.beers.map((beer, i) => {
       if (beer._id === updatedBeer._id) {
         updatedBeer.votes++;
         return  updatedBeer
       }
       return beer
     });
-    console.log(this.poll.beers);
-    this.props.dispatch(vote(this.poll))
+    const newPoll = Object.assign(this.state.poll, {beers: newBeers});
+    this.props.dispatch(vote(newPoll));
+    this.setState({
+      poll: newPoll,
+      beer: newBeers })
   }
 
   render() {
-    let poll;
-    let beers =[];
-    if(this.props.polls.length > 0) {
-      poll = this.props.polls.filter((poll)=> {
-         return (poll._id === this.props.match.params.id)
-       })[0];
-       this.poll = poll;
-        beers = poll.beers.map((beer, i) => {
-           return (
-            <Beer beer={beer} key={i} onVote={this.onVote}/>
-           )
-        });
 
-        return(<div>
-          <h4>{poll.pollName}</h4>
-          <h5>{poll.user}</h5>
-          {beers}
-        </div>)
+    let beers =[];
+    if(this.state.poll) {
+      beers = this.state.beers.map((beer, i) => {
+         return (
+          <Beer beer={beer} key={i} onVote={this.onVote}/>
+         )
+      });
+      return(<div>
+        <h4>{this.state.poll.pollName}</h4>
+        <h5>{this.state.poll.user}</h5>
+        {beers}
+      </div>)
     }
       return (<div>Loading...</div>)
   }

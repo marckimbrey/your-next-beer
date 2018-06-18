@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Button from '@material-ui/core/Button';
 
 import {registerUser} from '../../actions/users'
+
+const styles = {
+  form: {
+    marginTop: '10%'
+  }
+}
 
 class Register extends Component  {
 
@@ -33,7 +40,11 @@ class Register extends Component  {
 
   render() {
     return(
-      <form action="/api/users/register" onSubmit={this.handleFormSubmit} method="post">
+      <form
+        action="/api/users/register"
+        onSubmit={this.handleFormSubmit}
+        method="post"
+        style={styles.form}>
         <div className="form-field">
           <label>username:</label>
           <input
@@ -61,7 +72,7 @@ class Register extends Component  {
             value={this.state.password}
             onChange={this.onInputChange}required />
         </div>
-        <button type="submit">Register</button>
+        <Button type="submit">Register</Button>
       </form>
     )
   }

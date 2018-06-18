@@ -1,9 +1,16 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import Button from '@material-ui/core/Button';
+import Input from '@material-ui/core/Input';
+ import InputLabel from '@material-ui/core/InputLabel';
 
 import {loginUser} from '../../actions/users'
 
-
+const styles = {
+  form: {
+    marginTop: '10%'
+  }
+}
 class Login extends Component  {
   constructor() {
     super()
@@ -32,10 +39,14 @@ class Login extends Component  {
 
   render() {
     return(
-      <form action="/api/users/login" method="post" onSubmit={this.handleFormSubmit}>
+      <form
+        action="/api/users/login"
+        method="post"
+        onSubmit={this.handleFormSubmit}
+        style={styles.form}>
         <div className="form-field">
-          <label>username:</label>
-          <input
+          <InputLabel>username:</InputLabel>
+          <Input
             type="text"
             placeholder="Enter Username"
             name="username"
@@ -43,15 +54,15 @@ class Login extends Component  {
             onChange={this.onInputChange} required />
         </div>
         <div className="form-field">
-          <label>password:</label>
-          <input
+          <InputLabel>password:</InputLabel>
+          <Input
             type="password"
             placeholder="Enter Password"
             name="password"
             value={this.state.password}
             onChange={this.onInputChange} required />
         </div>
-        <button type="submit">Login</button>
+        <Button type="submit" variant="contained">Login</Button>
       </form>
     )
   }

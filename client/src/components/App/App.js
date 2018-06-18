@@ -18,6 +18,13 @@ import CreatePoll from '../CreatePoll/CreatePoll'
 import Poll from '../Poll/Poll'
 import Header from '../Header/Header'
 
+import Grid from '@material-ui/core/Grid';
+
+const styles = {
+  grid: {
+    marginTop: 50
+  }
+}
 
 class App extends Component {
   constructor() {
@@ -35,7 +42,7 @@ class App extends Component {
    render() {
     return (
       <Router>
-        <div className="App">
+        <Grid container styles={styles.grid} justify="center" className="App">
           <Header />
           <Route exact path='/'  render={(props) => (
             <PollList {...props} polls={this.props.polls} />
@@ -44,7 +51,7 @@ class App extends Component {
           <Route path='/register' component={Register}/>
           <Route path='/createpoll' component={CreatePoll}/>
           <Route path='/poll/:id' component={Poll}/>
-        </div>
+        </Grid>
       </Router>
     );
   }

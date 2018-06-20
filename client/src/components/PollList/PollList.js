@@ -21,7 +21,7 @@ export default (props) => {
 
   const pollList = props.polls.map((poll, i) => {
     return (
-      <PollListItem poll={poll} key={i}/>
+      <PollListItem poll={poll} key={i} i={i}/>
     )}
   )
   return(

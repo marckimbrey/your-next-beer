@@ -19,7 +19,8 @@ const styles = {
   navLink: {
   },
   button: {
-    marginRight: 20
+    marginRight: 20,
+    color: 'white'
     }
 }
  export default () => {

@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 
 import {fetchBeers} from '../../actions/beers';
 
+import Select from '@material-ui/core/Select';
+
+
 
 
 class BeerSelect extends Component {
@@ -23,7 +26,8 @@ class BeerSelect extends Component {
   }
    render() {
     return (
-      <select
+      <Select
+        native
         multiple={true}
         value={this.props.beersSelected}
         onChange={this.props.onSelect}
@@ -31,7 +35,7 @@ class BeerSelect extends Component {
 
           {this.getBeerOptions(this.props.beers)}
 
-      </select>
+      </Select>
     );
   }
 }

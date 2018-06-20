@@ -7,6 +7,12 @@ import {vote} from '../../actions/polls';
 import Beer from './Beer';
 
 
+const styles = {
+  div: {
+    marginTop: 100
+  }
+}
+
 class Poll extends Component {
 
   constructor(props) {
@@ -50,13 +56,13 @@ class Poll extends Component {
           <Beer beer={beer} key={i} onVote={this.onVote}/>
          )
       });
-      return(<div>
+      return(<div style={styles.div}>
         <h4>{this.state.poll.pollName}</h4>
         <h5>{this.state.poll.user}</h5>
         {beers}
       </div>)
     }
-      return (<div>Loading...</div>)
+      return (<div style={styles.div}>Loading...</div>)
   }
 }
 

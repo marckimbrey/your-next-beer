@@ -6,6 +6,15 @@ import BeersSelect from './BeersSelect';
 import AddBeer from './AddBeer'
 import {createPoll} from '../../actions/polls';
 
+import Button from '@material-ui/core/Button';
+import Input from '@material-ui/core/Input';
+ import InputLabel from '@material-ui/core/InputLabel';
+
+const styles = {
+  container: {
+    marginTop: 100
+  }
+}
 
 class CreatePoll extends Component {
   constructor() {
@@ -42,13 +51,13 @@ class CreatePoll extends Component {
 
   render() {
     return(
-      <div>
+      <div style={styles.container}>
       <AddBeer />
       <form action="/polls/add" method="post" onSubmit={this.handleFormSubmit}>
 
         <div className="form-field">
-          <label>Poll Name:</label>
-          <input
+          <InputLabel>Poll Name:</InputLabel>
+          <Input
             type="text"
             placeholder="poll name"
             name="pollName"
@@ -59,7 +68,7 @@ class CreatePoll extends Component {
 
           <BeersSelect onSelect={this.onInputChange} beersSelected={this.state.beers} />
         </div>
-        <button type="submit">Login</button>
+        <Button variant="contained" type="submit">Submit</Button>
       </form>
     </div>
     )

@@ -2,7 +2,11 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import {postBeer} from '../../actions/beers'
+import {postBeer} from '../../actions/beers';
+
+import Button from '@material-ui/core/Button';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
 
 
 class AddBeer extends Component {
@@ -55,53 +59,53 @@ class AddBeer extends Component {
     if (this.state.formVisable) {
      form = <form className="add-beer-form" ref="formData"  onSubmit={this.handleFormSubmit}>
       <div className="form-field">
-        <label>Beer Name:</label>
-        <input
+        <InputLabel>Beer Name:</InputLabel>
+        <Input
           type="text"
           name="name"
           value={this.state.name}
           onChange={this.handleNameChange} required />
       </div>
       <div className="form-field">
-        <label>Country:</label>
-        <input
+        <InputLabel>Country:</InputLabel>
+        <Input
           type="text"
           name="country"
           value={this.state.country}
           onChange={this.handleCountryChange} required />
       </div>
       <div className="form-field">
-        <label>Brewery:</label>
-        <input
+        <InputLabel>Brewery:</InputLabel>
+        <Input
           type="text"
            name="brewery"
            value={this.state.brewery}
            onChange={this.handleBreweryChange} required />
       </div>
       <div className="form-field">
-        <label>Style:</label>
-        <input
+        <InputLabel>Style:</InputLabel>
+        <Input
           type="text"
           name="style"
           value={this.state.style}
           onChange={this.handleStyleChange} required />
       </div>
       <div className="form-field">
-        <label>strength:</label>
-        <input
+        <InputLabel>strength:</InputLabel>
+        <Input
           type="text"
           name="strength"
           value={this.state.strength}
           onChange={this.handleStrengthChange} required />
       </div>
-      <button type='submit'>Add Beer</button>
+      <Button variant='contained' type='submit'>Add Beer</Button>
     </form>
   } else {
     form = null
   }
    return(
       <div className="addBeer">
-        <button onClick={() => this.toggleForm()}>add Beer</button>
+        <Button variant='contained' onClick={() => this.toggleForm()}>add Beer</Button>
         {form}
       </div>
     )

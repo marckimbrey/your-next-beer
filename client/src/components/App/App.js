@@ -43,7 +43,7 @@ class App extends Component {
     return (
       <Router>
         <Grid container styles={styles.grid} justify="center" className="App">
-          <Header />
+          <Header user={this.props.user} />
           <Route exact path='/'  render={(props) => (
             <PollList {...props} polls={this.props.polls} />
           )}/>
@@ -58,7 +58,10 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-  return {polls: state.polls};
+  return {
+    polls: state.polls,
+    user: state.user
+  };
 }
 
 export default connect(mapStateToProps)(App);

@@ -15,6 +15,9 @@ const styles = {
     display: 'inline-block',
     margin: 10,
     color: 'white'
+  },
+  submit: {
+    color: 'white'
   }
 
 }
@@ -65,7 +68,7 @@ class Login extends Component  {
             style={styles.input}
             value={this.state.password}
             onChange={this.onInputChange} required />
-        <Button type="submit" variant="contained">Login</Button>
+        <Button type="submit" style={styles.submit}>Login</Button>
       </form>
     )
   }

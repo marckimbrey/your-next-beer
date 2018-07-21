@@ -34,7 +34,7 @@ class Register extends Component  {
   onInputChange(event) {
     let newValue = {};
     newValue[event.target.name] = event.target.value;
-    this.setState({...this.state,  newValue});
+        this.setState(Object.assign(this.state,newValue));
   }
 
 

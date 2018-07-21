@@ -10,7 +10,15 @@ export default function userReducer(state = {}, action) {
 
     case 'LOGIN_USER_FULFILLED':
       console.log('user logged in', action);
-      return {...state ,  ...action.payload}
+      return {...state ,  ...action.payload.user}
+
+    case 'VERIFY_USER_TOKEN_FULFILLED':
+      console.log('user logged in', action);
+      return {...state ,  ...action.payload.user}
+
+    case 'VERIFY_USER_TOKEN_REJECTED':
+      console.log('verify user rejected');
+      return {...state}
 
     default:
       return state;

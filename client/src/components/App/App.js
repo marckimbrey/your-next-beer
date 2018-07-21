@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import {fetchPolls} from '../../actions/polls';
+import {verifyUserToken} from '../../actions/users';
 
 import './App.css';
 import {
@@ -35,8 +36,10 @@ class App extends Component {
 
     this.props.dispatch(fetchPolls())
     // on app load check if username in localStorage
-    if(window.localStorage.getItem('username')) {
-
+    if(window.localStorage.getItem('user')) {
+      const user = JSON.parse(window.localStorage.getItem('user'));
+      console.log(user)
+      this.props.dispatch(verifyUserToken(user.token));
     }
   }
    render() {

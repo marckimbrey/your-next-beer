@@ -1,5 +1,6 @@
 const REGISTER_USER = 'REGISTER_USER';
-const LOGIN_USER = 'LOGIN_USER'
+const LOGIN_USER = 'LOGIN_USER';
+const VERIFY_USER_TOKEN = 'VERIFY_USER_TOKEN'
 
 export function registerUser(data) {
       console.log('registerUser', data)
@@ -20,8 +21,22 @@ export function loginUser(data) {
     {method: 'POST', headers: {"Content-Type": "application/json" },
     body: JSON.stringify(data)}).then(
       response => {
-        console.log('response', response)
         return response.json()
       })
+  }
+}
+
+export function verifyUserToken(token) {
+  console.log('token',token)
+  return {
+    type: VERIFY_USER_TOKEN,
+    payload: fetch('/api/users/verifyToken',
+    {method: 'POST', headers: {"Content-Type": "application/json" },
+    body:JSON.stringify({token:token})}).then(
+      response => {
+        console.log('verify user token', response)
+        return response.json()
+      })
+
   }
 }

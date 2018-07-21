@@ -41,9 +41,8 @@ class Login extends Component  {
     if(event) event.preventDefault();
     console.log(this.state)
     this.props.dispatch(loginUser(this.state)).then( response => {
-
       localStorage.setItem('username', response.value.username)
-      localStorage.setItem('token', response.value.token)
+      localStorage.setItem('user', JSON.stringify(response.value.user));
     })
   }
 

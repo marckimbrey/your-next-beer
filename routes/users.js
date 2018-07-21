@@ -21,7 +21,7 @@ router.post('/register', function(req, res) {
 
         } else {
           // create jwt
-          var token = jwt.sign({user: newUser.username }, 'Costa Rica')
+          var token = jwt.sign({user: newUser }, 'Costa Rica')
           res.json({username: newUser.username, token: token, authenticated: true});
         }
     });
@@ -29,8 +29,16 @@ router.post('/register', function(req, res) {
 
 router.post('/login', passport.authenticate('local'), function(req, res) {
   // create jwt
-  var token = jwt.sign({user: req.body.username }, 'Costa Rica')
-  res.json({username: req.body.username, token: token, authenticated: true});
+  var token = jwt.sign({user: req.body }, 'Costa Rica')
+
+  res.json({user:{username: req.body.username, token: token, authenticated: true}});
+});
+
+router.post('/verifyToken', passport.authenticate('jwt'), function(req, res) {
+  // find user
+  console.log('login user using token', req.user)
+  // return user
+    res.json({user:{username: req.user.username, token: req.body.token, authenticated: true}});
 });
 
 router.get('/logout', function(req, res) {

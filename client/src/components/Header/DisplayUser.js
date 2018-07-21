@@ -1,4 +1,5 @@
 import React from 'react'
+import Login from './Login';
 
 import Typography from '@material-ui/core/Typography';
 
@@ -8,7 +9,11 @@ const styles = {
   }
 }
 export default (props) => {
-  return (
-    <Typography variant="headline" style={styles.username}>Hello {props.userName}</Typography>
-  )
+  if (props.userName) {
+    return (
+      <li><Typography variant="headline" style={styles.username}>Hello {props.userName}</Typography></li>
+    )
+  } else {
+    return (<li><Login /></li>);
+  }
 }

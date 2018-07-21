@@ -1,6 +1,7 @@
 const REGISTER_USER = 'REGISTER_USER';
 const LOGIN_USER = 'LOGIN_USER';
-const VERIFY_USER_TOKEN = 'VERIFY_USER_TOKEN'
+const VERIFY_USER_TOKEN = 'VERIFY_USER_TOKEN';
+const LOGOUT_USER = 'LOGOUT_USER';
 
 export function registerUser(data) {
       console.log('registerUser', data)
@@ -38,5 +39,13 @@ export function verifyUserToken(token) {
         return response.json()
       })
 
+  }
+}
+
+export function logoutUser() {
+  window.localStorage.removeItem('user', null)
+  return {
+    type: LOGOUT_USER,
+    payload: {user: null}
   }
 }

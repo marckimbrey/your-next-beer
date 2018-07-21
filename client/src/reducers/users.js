@@ -20,6 +20,10 @@ export default function userReducer(state = {}, action) {
       console.log('verify user rejected');
       return {...state}
 
+    case 'LOGOUT_USER':
+
+      return {...state.user, ...action.payload.user}
+
     default:
       return state;
   }

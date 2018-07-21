@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
 import {NavLink} from 'react-router-dom'
-import Login from './Login';
 import DisplayUser from './DisplayUser';
+import {logoutUser} from '../../actions/users';
 
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
@@ -26,22 +29,27 @@ const styles = {
     color: 'white'
     }
 }
+
  export default (props) => {
-   let loggedIn;
-   let btn;
+
+   let btn = [];
    if(!props.user.username) {
-      loggedIn = <li><Login /></li>;
-      btn = <li><NavLink style={styles.navLink} xs={3} to="../register">
+      btn.push(<li><NavLink style={styles.navLink} xs={3} to="../register">
         <Button style={styles.button} >Register</Button>
-      </NavLink></li>
+      </NavLink></li>)
 
 
    } else {
-     loggedIn = <li>
-       <DisplayUser userName={props.user.username} /></li>;
-     btn =  <li><NavLink style={styles.navLink} xs={3} to="../createPoll">
+
+     btn.push(<li><NavLink style={styles.navLink} xs={3} to="../createPoll">
                 <Button style={styles.button} >Create Poll</Button>
-              </NavLink></li>
+              </NavLink></li>)
+    btn.push(<li>
+               <Button
+                 style={styles.button}
+                 onClick={()=> {props.dispatch(logoutUser())}}
+                 >Logout</Button>
+             </li>)
    }
    return (
        <AppBar>
@@ -49,7 +57,7 @@ const styles = {
          <li style={styles.header}><Typography variant="display1" xs={6} color="inherit" >
            Your Next Beer
          </Typography></li>
-         {loggedIn}
+        <DisplayUser userName={props.user.username} />
          {btn}
         </ul>
       </AppBar>

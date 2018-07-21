@@ -28,12 +28,11 @@ const styles = {
 }
 
 class App extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
   }
   componentWillMount() {
-
     this.props.dispatch(fetchPolls())
     // on app load check if username in localStorage
     if(window.localStorage.getItem('user')) {
@@ -41,22 +40,25 @@ class App extends Component {
       console.log(user)
       this.props.dispatch(verifyUserToken(user.token));
     }
+
+
   }
-   render() {
-    return (
-      <Router>
-        <Grid container styles={styles.grid} justify="center" className="App">
-          <Header user={this.props.user} />
-          <Route exact path='/'  render={(props) => (
-            <PollList {...props} polls={this.props.polls} />
-          )}/>
-          <Route path='/login' component={Login}/>
-          <Route path='/register' component={Register}/>
-          <Route path='/createpoll' component={CreatePoll}/>
-          <Route path='/poll/:id' component={Poll}/>
-        </Grid>
-      </Router>
-    );
+
+ render() {
+  return (
+    <Router>
+      <Grid container styles={styles.grid} justify="center" className="App">
+        <Header user={this.props.user} dispatch={this.props.dispatch}/>
+        <Route exact path='/'  render={(props) => (
+          <PollList {...props} polls={this.props.polls} />
+        )}/>
+        <Route path='/login' component={Login}/>
+        <Route path='/register' component={Register}/>
+        <Route path='/createpoll' component={CreatePoll}/>
+        <Route path='/poll/:id' component={Poll}/>
+      </Grid>
+    </Router>
+  );
   }
 }
 
